@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
     },
     watchHistory: [
         {
-            type: Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,    //It's an array of references to Video documents
             ref: "Video"
         }
     ],
