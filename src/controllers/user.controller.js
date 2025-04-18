@@ -255,7 +255,7 @@ const changeCurrentPassword = asynchandler(async (req, res) => {
 const getCurrentUser = asynchandler(async (req, res) => {
   return res
     .status(200)
-    .json(200, req.user, "Current user fetched successfullly");
+    .json(new ApiResponse(200, req.user, "Current user fetched successfullly"));
 });
 
 // Upadet Account details
@@ -267,12 +267,12 @@ const updateAccountDetails = asynchandler(async (req, res) => {
     throw new ApiError(400, "All filed are required");
   }
 
-  const user = User.findByIdAndUpdate(
+  const user = await User.findByIdAndUpdate(
     req.user?._id,
     {
       $set: {
-        fullName: fullName,
-        email: email,
+        fullName,
+        email,
       },
     },
     { new: true }
